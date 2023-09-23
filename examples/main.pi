@@ -1,0 +1,12 @@
+Hello there!
+This tests the preprocessor
+// One line comment
+A line in between
+// Another one line comment
+
+Hello again
+/* I am
+a 
+multiline comment */
+Hope i get this first try
+Didn't :(
