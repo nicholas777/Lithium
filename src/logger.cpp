@@ -2,7 +2,7 @@
 #include <spdlog/common.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
-namespace Pirut
+namespace Lithium
 {
     std::shared_ptr<spdlog::logger> Logger::m_Logger; 
 

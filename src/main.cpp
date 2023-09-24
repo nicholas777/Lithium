@@ -4,7 +4,7 @@
 
 #include <vector>
 
-using namespace Pirut;
+using namespace Lithium;
 
 int main(int argc, char** argv)
 {

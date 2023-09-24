@@ -4,7 +4,7 @@
 #include <spdlog/fmt/fmt.h>
 #include <stdlib.h>
 
-namespace Pirut
+namespace Lithium
 {
 
     static bool IsCodeException(ErrorCode code)

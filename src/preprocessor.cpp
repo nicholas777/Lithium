@@ -4,7 +4,7 @@
 #include <stddef.h>
 #include <iostream>
 
-namespace Pirut
+namespace Lithium
 {
 
     std::string PreProcessor::PreProcess()
@@ -16,7 +16,6 @@ namespace Pirut
 
         for (size_t i = 0; i < m_Input.size(); i++)
         {
-            std::cout << m_Input[i] << std::endl;
             if (m_Input[i] == '/')
             {
                 if (m_Input[i+1] == '/')

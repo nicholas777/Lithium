@@ -12,7 +12,7 @@ project(
 
 add_executable(pirut 
     src/main.cpp src/logger.cpp src/exceptions.cpp src/compiler.cpp 
-    src/preprocessor.cpp
+    src/preprocessor.cpp src/lexer.cpp src/parser.cpp
 )
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

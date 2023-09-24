@@ -3,7 +3,7 @@
 #include <spdlog/spdlog.h>
 #include <memory>
 
-namespace Pirut
+namespace Lithium
 {
 
     class Logger

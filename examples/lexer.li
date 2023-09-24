@@ -1,0 +1,7 @@
+// This file tests the lexer!
+/* Comments cuz i can */
+
+12
+15.66
+AFunctionName();
+"Hello, World!" = 3 + 2 - 5 * 2;

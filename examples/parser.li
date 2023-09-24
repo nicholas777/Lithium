@@ -1,0 +1,12 @@
+// This file tests the parser:
+
+// 3 + 5 * 4;
+
+// First try?
+// Omg i actually got it first try
+/*
+3+3+3-3;
+5*4 + 2;
+*/
+// Parenthesis
+3 * (3+3);

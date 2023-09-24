@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace Pirut
+namespace Lithium
 {
 
     class PreProcessor

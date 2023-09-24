@@ -2,13 +2,15 @@
 
 #include <string>
 
-namespace Pirut
+namespace Lithium 
 {
 
     enum class ErrorCode
     {
         None = 0,
-        CmdLineInputException
+        CmdLineInputException, InvalidSourceFile,
+        InvalidString,
+        InvalidMath
     };
 
     struct Exception
