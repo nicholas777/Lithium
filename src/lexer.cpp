@@ -10,7 +10,7 @@
 namespace Lithium
 {
 
-    bool Token::IsHigherOtherOperator(const Token& other)
+    bool Token::IsHigherOtherOperator(const Token& other) const
     {
         return (Type == TokenType::OperatorMul && other.Type == TokenType::OperatorPlus) ||
             (Type == TokenType::OperatorMul && other.Type == TokenType::OperatorMinus) ||
@@ -18,12 +18,12 @@ namespace Lithium
             (Type == TokenType::OperatorDiv && other.Type == TokenType::OperatorMinus);
     }
 
-    bool Token::IsNumeric()
+    bool Token::IsNumeric() const
     {
         return Type == TokenType::Integer || Type == TokenType::Float;
     }
 
-    bool Token::IsOperator()
+    bool Token::IsOperator() const
     {
         return Type == TokenType::OperatorPlus
             || Type == TokenType::OperatorMinus
@@ -31,13 +31,19 @@ namespace Lithium
             || Type == TokenType::OperatorMul;
     }
 
-    bool Token::IsValue()
+    bool Token::IsValue() const
     {
         return IsNumeric() || Type == TokenType::String;
     }
 
+    bool Token::IsLiteral() const
+    {
+        return Type == TokenType::String || IsNumeric();
+    }
+
     static std::unordered_map<TokenType, const char*> TokenTypeToString = {
         { TokenType::None, "None" },
+        { TokenType::Root, "Root" },
         { TokenType::String, "String" },
         { TokenType::Symbol, "Symbol" },
         { TokenType::Semicolon, "Semicolon" },
@@ -50,10 +56,17 @@ namespace Lithium
         { TokenType::Float, "Float" },
         { TokenType::LeftParen, "LeftParen" },
         { TokenType::RightParen, "RightParen" },
+        { TokenType::VarDecl, "VarDecl" },
+        { TokenType::FnDecl, "FnDecl" },
     };
 
     std::string Token::ToString(const Token& token)
     {
+        if (token.Value == "")
+        {
+            return fmt::format("Type: {}", TokenTypeToString[token.Type]);
+        }
+
         return fmt::format("Type: {}, Value: {}", 
                 TokenTypeToString[token.Type],
                 token.Value);
@@ -133,6 +146,11 @@ namespace Lithium
             result += m_Input[m_Index];
             m_Index++;
         }
+
+        if (result == "let")
+            return Token(TokenType::VarDecl);
+        else if (result == "fn")
+            return Token(TokenType::FnDecl);
 
         return Token(TokenType::Symbol, result);
     }

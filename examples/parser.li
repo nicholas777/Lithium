@@ -9,4 +9,8 @@
 5*4 + 2;
 */
 // Parenthesis
-3 * (3+3);
+// 3 * (3+3);
+
+//// Variables ////
+
+let name = "Nicholas";

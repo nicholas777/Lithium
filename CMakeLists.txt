@@ -4,20 +4,21 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 project(
-  Pirut
+    Lithium
     VERSION 0.0.1
     DESCRIPTION "A programming Language"
     HOMEPAGE_URL "doesnotexist.com"
     LANGUAGES CXX)
 
-add_executable(pirut 
+add_executable(lithium
     src/main.cpp src/logger.cpp src/exceptions.cpp src/compiler.cpp 
-    src/preprocessor.cpp src/lexer.cpp src/parser.cpp
+    src/preprocessor.cpp src/lexer.cpp src/parser.cpp src/optimizer.cpp
+    src/analyzer.cpp
 )
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-target_include_directories(pirut PUBLIC src 
+target_include_directories(lithium PUBLIC src 
     vendor/spdlog/include
     vendor/spdlog/include/spdlog/fmt
 )
@@ -28,7 +29,7 @@ find_package(spdlog REQUIRED)
 set(SPDLOG_BUILD_EXAMPLE OFF CACHE BOOL "Build spdlog example" FORCE)
 set(SPDLOG_BUILD_TESTS OFF CACHE BOOL "Build spdlog tests" FORCE)
 
-target_link_libraries(pirut PRIVATE spdlog::spdlog)
+target_link_libraries(lithium PRIVATE spdlog::spdlog)
 
 add_executable(example vendor/spdlog/example/example.cpp)
 

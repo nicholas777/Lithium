@@ -1,0 +1,5 @@
+// This file tests the semantic error generation
+
+value;
+let value = 5;
+let value = 7;

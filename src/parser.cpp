@@ -7,7 +7,7 @@ namespace Lithium
 
     SyntaxTree Parser::Parse()
     {
-        m_Result.Root.token = Token(TokenType::None, "");
+        m_Result.Root.token = Token(TokenType::Root);
         SyntaxTreeNode& currentToken = m_Result.Root;
         
         while (m_Index < m_Tokens.size())
@@ -35,6 +35,64 @@ namespace Lithium
             return VisitParenToken();
         else if (token.Type == TokenType::Semicolon)
             return { token };
+        else if (token.Type == TokenType::VarDecl)
+            return VisitVariableToken();
+        else if (token.IsLiteral())
+            return { token };
+        else if (token.Type == TokenType::Symbol)
+            return { token };
+
+        return {};
+    }
+
+    SyntaxTreeNode Parser::VisitVariableToken()
+    {
+        if (m_Index >= m_Tokens.size() - 2)
+        {
+            ThrowException(
+                Exception("Invalid variable declaration", ErrorCode::InvalidVariableDecl));
+
+            return {};
+        }
+        else if (m_Tokens[m_Index+1].Type != TokenType::Symbol)
+        {
+            ThrowException(
+                Exception("Invalid variable declaration", ErrorCode::InvalidVariableDecl));
+
+            return {};
+        }
+
+        uint32_t nameIndex = m_Index + 1;
+        m_Index += 2;
+        if (m_Tokens[m_Index].Type == TokenType::Equals)
+        {
+            m_Index++;
+            SyntaxTreeNode value = VisitToken();
+
+            if (!value.token.IsValue())
+            {
+                ThrowException(
+                    Exception("Invalid variable declaration", ErrorCode::InvalidVariableDecl));
+            }
+
+            SyntaxTreeNode node;
+            node.token = { TokenType::VarDecl, m_Tokens[nameIndex].Value };
+            node.children.push_back(value);
+            return node;
+        }
+        else if (m_Tokens[m_Index].Type == TokenType::Semicolon)
+        {
+            SyntaxTreeNode node;
+            node.token = { TokenType::VarDecl, m_Tokens[m_Index-1].Value };
+            return node;
+        }
+        else
+        {
+            ThrowException(
+                Exception("Invalid variable declaration", ErrorCode::InvalidVariableDecl));
+
+            return {};
+        }
 
         return {};
     }

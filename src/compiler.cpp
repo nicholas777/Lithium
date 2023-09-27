@@ -4,6 +4,8 @@
 #include "logger.h"
 #include "parser.h"
 #include "preprocessor.h"
+#include "optimizer.h"
+#include "analyzer.h"
 
 #include <fstream>
 #include <sstream>
@@ -54,8 +56,27 @@ namespace Lithium
 
         std::cout << "\n";
         Logger::Info("AST\n");
+        ast.Print();
+
+        Analyzer analyzer{ ast };
+        std::vector<Exception> exceptions = analyzer.Analyze();
+
+        std::cout << "\n";
+
+        for (auto& exception : exceptions)
+            ThrowException(exception);
+
+        std::cout << "\n";
+        Logger::Info("Optimized\n");
+
+        Optimizer optimizer{ ast };
+        ast = optimizer.Optimize();
 
         ast.Print();
+
+        // ByteCodeTranslator translator{ ast };
+        // ByteCodeProgram* program = translator.Translate();
     }
 
 }
+

@@ -10,7 +10,8 @@ namespace Lithium
         None = 0,
         CmdLineInputException, InvalidSourceFile,
         InvalidString,
-        InvalidMath
+        InvalidMath,
+        InvalidVariableDecl, UseBeforeDeclaration, AlreadyDeclared
     };
 
     struct Exception

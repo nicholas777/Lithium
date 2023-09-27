@@ -9,12 +9,13 @@ namespace Lithium
 
     enum class TokenType
     {
-        None = 0,
+        None = 0, Root,
         Integer, Float, String,
         OperatorPlus, OperatorMinus, OperatorMul, OperatorDiv,
         Symbol,
         Equals, Semicolon,
-        LeftParen, RightParen
+        LeftParen, RightParen,
+        VarDecl, FnDecl
     };
 
     struct Token
@@ -32,11 +33,12 @@ namespace Lithium
 
         static std::string ToString(const Token& token);
 
-        bool IsNumeric();
-        bool IsOperator();
-        bool IsValue();
+        bool IsNumeric() const;
+        bool IsOperator() const;
+        bool IsValue() const;
+        bool IsLiteral() const;
 
-        bool IsHigherOtherOperator(const Token& other);
+        bool IsHigherOtherOperator(const Token& other) const;
     };
 
     class Lexer

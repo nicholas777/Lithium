@@ -62,6 +62,7 @@ namespace Lithium
         SyntaxTreeNode VisitParenToken();
         SyntaxTreeNode VisitNumberToken();
         SyntaxTreeNode VisitOperatorToken();
+        SyntaxTreeNode VisitVariableToken();
     };
 
 }
